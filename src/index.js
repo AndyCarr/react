@@ -1,32 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from './serviceWorker';
+import useWindowDimensions from './screen-size';
 
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-}
-
-export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return windowDimensions;
-}
 
 const Component = () => {
   const { height, width } = useWindowDimensions();
@@ -34,7 +10,7 @@ const Component = () => {
   return (
     <div>
       <h1> Here be Dragons</h1>
-      
+
       width: {width} ~ height: {height}
     </div>
   );
